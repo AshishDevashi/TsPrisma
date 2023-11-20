@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tweet {
+  id           String   @id @default(uuid())
+  title        String
+  descripation String
+  userId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Tweet     Tweet[]
+}
+
+// for adding model into database === npx prisma migrate dev --name <migration-name>
+// for showing upToDate data in prisma client === npx prisma generate
+// for pulling all table from database to convert into prisma === npx prisma db pull 
