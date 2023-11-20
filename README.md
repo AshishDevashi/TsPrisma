@@ -1,0 +1,2 @@
+# TsPrisma
+express + typeScript +Prisma
