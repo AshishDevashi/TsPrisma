@@ -1,5 +1,6 @@
 import * as express from "express";
 import { PrismaClient  } from '@prisma/client'
+import * as jwt from 'jsonwebtoken'
 const prisma = new PrismaClient()
 const router  = express.Router()
 
@@ -20,7 +21,13 @@ router.post('/login', async(req, res) => {
     if(!user){
         return res.json({error: "User Not Found"}).status(404)
     }
-    res.json(user)
+    let token = jwt.sign(
+        {id: user.id},
+        process.env.JWTSECRET,
+        {expiresIn: "24h" }
+        )
+
+    res.cookie('uid',token).render('home',user)
     // res.redirect('/')
 })
 

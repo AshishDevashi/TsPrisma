@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if (user) { %>
+        <h1>Welcome <%= user.name %></h1>
+      <% } %>
+        <h2>Create Tweet : </h2>
+        <form action="/tweet" method="post">
+            <div>
+                <label id="title">Title :</label>
+                <input id="title" name="title" required/>
+            </div>
+            <br>
+            <div>
+                <label id="descripation">Descripation :</label>
+                <input id="descripation" name="descripation" required/>
+            </div>
+            <input hidden type="id" name="userId" value="<%= user.id %>">
+            <br>
+            <button>Submit</button>
+        </form>
+
+        <% if(user.Tweet) { %>
+            <h2>Your tweet :</h2>
+            <% tweet = user.Tweet.map(elem => {
+                return '<b>' + elem.title + '</b>' + '--' + elem.descripation ;
+            }) -%>
+            <p style="margin-bottom: 10px;"><%- tweet.join(" <br> ") %></p>
+        <% } %>
+</body>
+</html>
