@@ -1,6 +1,7 @@
 import * as express from "express";
 import { Prisma, PrismaClient  } from '@prisma/client'
 import { handlePrismaError } from "../utils/handlePrismaError";
+import { ConverthashPassword } from "../utils/hashPassword";
 
 
 const prisma = new PrismaClient()
@@ -12,10 +13,11 @@ router.get('/user', async(req, res) => {
 })
 router.post('/user', async(req, res) => {
     const {name,email,password} = req.body
+    let newPassword =  await ConverthashPassword(password)
     try {
         const user = await prisma.user.create({
             data:{
-                name,email,password
+                name,email,password:newPassword
             }
         })
         res.json(user).status(200)
