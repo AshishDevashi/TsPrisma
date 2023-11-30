@@ -5,26 +5,31 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
 
-const Home = async(req:Request, res:Response,next:NextFunction) => {
-    try {
+const IsUser = async(req:Request, res:Response,next:NextFunction) => {
         const token = req.cookies.uid
-        if(!token) return res.redirect('/login')
-        const decodedToken = jwt.verify(token,process.env.JWTSECRET ) as TokenType;
-        const user = await prisma.user.findUnique({
-            where: {
-                id: decodedToken.id
-            },
-            include: {
-                Tweet: true, 
-              },
-        })  
-        res.render('home',{user:user})
-    } catch (error) {
-        next(error)
-    }
+        if(!token){
+            return res.redirect('/auth/login')
+        }else{
+            return res.redirect('/home')
+        }
+        
 }
 
+const Home = async(req:Request, res:Response,next:NextFunction) => {
+    const token = req.cookies.uid
+    const decodedToken = jwt.verify(token,process.env.JWTSECRET ) as TokenType;
+    const user = await prisma.user.findUnique({
+        where: {
+            id: decodedToken.id
+        },
+        include: {
+            Tweet: true, 
+          },
+    })  
+    res.render('home',{user:user})
+}  
 
 export const HoemController = {
+    IsUser,
     Home
 };

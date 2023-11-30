@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Error</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+
+        .error-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!-- <img src="https://yourwebsite.com/path/to/error-image.png" alt="Error Image" class="img-fluid mb-4" style="max-width: 300px;"> -->
+        <h1 class="display-4">Oops! Something went wrong.</h1>
+        <p class="lead">We apologize for the inconvenience. The error has been logged and our team will look into it.</p>
+        <p class="lead"><%= err.message %></p>
+        <a href="/" class="btn btn-primary">Go to Homepage</a>
+    </div>
+</body>
+</html>

@@ -29,8 +29,7 @@ const isLogin = async(req:Request, res:Response)  => {
         process.env.JWTSECRET,
         {expiresIn: "24h" }
         )
-    res.cookie('uid',token).render('home',{user:user})
-    // res.redirect('/')
+    res.cookie('uid',token).redirect('/home')
 }
 
 const Login = async(req:Request, res:Response) =>{

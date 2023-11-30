@@ -6,9 +6,9 @@ import TweetRoute from './Tweet';
 
 const Allroutes = Router();
 
-Allroutes.use(UserRoute);
-Allroutes.use(LoginRoute);
 Allroutes.use(HomeRoute);
-Allroutes.use(TweetRoute);
+Allroutes.use('/u',UserRoute);
+Allroutes.use('/auth',LoginRoute);
+Allroutes.use('/user',TweetRoute);
 
 export default Allroutes;
