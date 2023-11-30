@@ -4,7 +4,7 @@ import * as cors from 'cors';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import * as bodyParser from 'body-parser';
-import Allroutes from '../route/route';
+import Allroutes from '../Route/route';
 import globalVariablesMiddleware from './globalVariablesMiddleware';
 import errorMiddleware from './errorMiddleware';
 

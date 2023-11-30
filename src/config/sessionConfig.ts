@@ -1,5 +1,3 @@
-import session from 'express-session';
-
 const sessionConfig = {
   secret: process.env.SECRET,
   resave: false,
