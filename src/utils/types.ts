@@ -1,8 +1,9 @@
 import { Request } from 'express';
 
-export interface CustomRequest extends Request {
-  user?: String; 
+export type CustomRequest = Request & {
+  user?: String,
+  session?: string  
 }
-export interface TokenType { 
-      id?: string;    
+export type TokenType = {
+  id?: string;   
 }
