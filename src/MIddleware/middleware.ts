@@ -2,11 +2,14 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import * as cookieParser from 'cookie-parser';
-import helmet from 'helmet';
 import * as bodyParser from 'body-parser';
+import * as morgan from 'morgan'
+import helmet from 'helmet';
 import Allroutes from '../Route/route';
 import globalVariablesMiddleware from './globalVariablesMiddleware';
 import errorMiddleware from './errorMiddleware';
+
+
 
 const configureMiddleware = (app: express.Application) => {
   app.use(express.json());
@@ -14,8 +17,8 @@ const configureMiddleware = (app: express.Application) => {
 
   app.use(cors());
   app.use(helmet());
+  // app.use(morgan('combined')); for production build
   
-  app.use(express.static('public'));
   app.use(cookieParser());
   
   app.use(globalVariablesMiddleware)
