@@ -1,30 +1,53 @@
 <%- include('Layout/header.ejs', {title: 'Home'}) %>
 
-
-    <% if (user) { %>
-        <h1>Welcome <%= user.name %></h1>
-      <% } %>
-        <h2>Create Tweet : </h2>
-        <form action="/tweet" method="post">
-            <div>
-                <label id="title">Title :</label>
-                <input id="title" name="title" required/>
+    <div class="container-fluid mt-5 ">
+        <div class="row justify-content-center align-items-center">
+        <!-- First Card -->
+        <div class="col-md-4 mb-3">
+            <% if (user) { %>
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title ">Welcome <%= user.name %></h5>
+                    <h2>Create Tweet : </h2>
+                    <form action="/user/tweet" method="post">
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="floatingTitle" name="title" placeholder="name@example.com" required>
+                            <label for="floatingTitle">Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingDes" name="descripation" placeholder="name@example.com" required>
+                            <label for="floatingDes">Descripation</label>
+                        </div>
+                        <input hidden type="id" name="userId" value="<%= user.id %>">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br>
-            <div>
-                <label id="descripation">Descripation :</label>
-                <input id="descripation" name="descripation" required/>
+            <% } %>
+        </div>
+    
+    
+        <!-- Second Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">All Tweet</h5>
+                <% if(user.Tweet && user.Tweet.length > 0) { %>
+                    <% user.Tweet.map(tweet => { %>
+                        <div class="custom-box">
+                            <h5 class="card-title"><%= tweet.title %></h5>
+                            <p class="card-text"><%= tweet.descripation %></p>
+                        </div>
+                    <% }); %>
+                <% } %>
             </div>
-            <input hidden type="id" name="userId" value="<%= user.id %>">
-            <br>
-            <button>Submit</button>
-        </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+  
 
-        <% if(user.Tweet) { %>
-            <h2>Your tweet :</h2>
-            <% tweet = user.Tweet.map(elem => {
-                return '<b>' + elem.title + '</b>' + '--' + elem.descripation ;
-            }) -%>
-            <p style="margin-bottom: 10px;"><%- tweet.join(" <br> ") %></p>
-        <% } %>
         <%- include('Layout/footer.ejs') %>

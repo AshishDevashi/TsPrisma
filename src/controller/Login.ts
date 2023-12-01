@@ -35,10 +35,14 @@ const isLogin = async(req:Request, res:Response)  => {
 const Login = async(req:Request, res:Response) =>{
     res.render('login')
 }
+const signup = async(req:Request, res:Response) =>{
+    res.render('signup')
+}
 
 
 
 export const LoginController = {
     isLogin,
-    Login
+    Login,
+    signup
 }
