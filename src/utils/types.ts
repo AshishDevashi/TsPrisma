@@ -7,3 +7,9 @@ export type CustomRequest = Request & {
 export type TokenType = {
   id?: string;   
 }
+export type EMAILType = {
+  email?: string,
+  subject?: string,
+  text?: string,
+  [name: string]: any;
+}
