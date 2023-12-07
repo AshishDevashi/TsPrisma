@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import Allroutes from '../Route/route';
 import globalVariablesMiddleware from './globalVariablesMiddleware';
 import errorMiddleware from './errorMiddleware';
+import { authorization } from './authMiddleware';
 
 
 
@@ -22,7 +23,6 @@ const configureMiddleware = (app: express.Application) => {
   app.use(cookieParser());
   
   app.use(globalVariablesMiddleware)
-  
   app.use(Allroutes);
   app.use(errorMiddleware)
 

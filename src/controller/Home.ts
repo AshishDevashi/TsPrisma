@@ -5,15 +5,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
 
-const IsUser = async(req:Request, res:Response,next:NextFunction) => {
-        const token = req.cookies.uid
-        if(!token){
-            return res.redirect('/auth/login')
-        }else{
-            return res.redirect('/home')
-        }
-        
-}
 
 const Home = async(req:Request, res:Response,next:NextFunction) => {
     const token = req.cookies.uid
@@ -30,6 +21,5 @@ const Home = async(req:Request, res:Response,next:NextFunction) => {
 }  
 
 export const HoemController = {
-    IsUser,
     Home
 };

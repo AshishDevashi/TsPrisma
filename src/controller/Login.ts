@@ -29,7 +29,7 @@ const isLogin = async(req:Request, res:Response)  => {
         process.env.JWTSECRET,
         {expiresIn: "24h" }
         )
-    res.cookie('uid',token).redirect('/home')
+    res.cookie('uid',token).redirect('/home/user')
 }
 
 const Login = async(req:Request, res:Response) =>{
@@ -38,11 +38,20 @@ const Login = async(req:Request, res:Response) =>{
 const signup = async(req:Request, res:Response) =>{
     res.render('signup')
 }
+const logout = async(req:Request, res:Response)=>{
+    const token = req.cookies.uid;
+    if (!token) {
+        return res.status(400).send('Token not found in cookies');
+      }
+    res.cookie('uid', '', { expires: new Date(0) });
+    res.redirect('/auth/login');
+}
 
 
 
 export const LoginController = {
     isLogin,
     Login,
-    signup
+    signup,
+    logout
 }

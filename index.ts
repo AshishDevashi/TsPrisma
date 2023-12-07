@@ -12,13 +12,6 @@ configureMiddleware(app);
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-const dataToSend = {
-    email : 'kpp31072000@gmail.com',
-    subject : 'test',
-    text : 'test',
-    otp: '12345'
-}
-sendMail(dataToSend)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
